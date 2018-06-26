@@ -7,42 +7,55 @@ import foods from '../foods';
   styleUrls: ['./food-list.component.css']
 })
 export class FoodListComponent implements OnInit {
-  foodsArray:Object[];
-  isInvisible:boolean;
-  todayArray:Object[];
-  totalCalories:number;
-  counter:number;
-  
+  foods: Object[];
+  pattern: string;
+  noVisible: boolean;
+  listFood: Object[];
+  totalCalories: number;
+  totalQuantity: number;
 
-
-  constructor() { }
+  constructor() {
+    this.noVisible = true;
+    this.listFood = [];
+    this.totalCalories = 0;
+    this.totalQuantity = 0;
+  }
 
   ngOnInit() {
-    this.isInvisible = true;
-    this.foodsArray=foods; // este "foods" es la base de datos y el otro es el array definido en la clase
-    this.todayArray=[];
-    this.totalCalories = 0;
-    this.counter = 0;
+    this.foods = foods;
   }
-  toggle(){
-    if(this.isInvisible == false){
-      this.isInvisible = true;
-    }else{
-      this.isInvisible = false;
+
+  showForm() {
+    if (this.noVisible) {
+      this.noVisible = false;
+    } else {
+      this.noVisible = true;
     }
   }
-  addFood(name, calories, quantity ){
-    this.foodsArray.unshift({ name, calories, quantity }); // que no se olvide meterlo como un OBJETO
-    this.toggle();
-  }
-  addTodayFood(food){
-    this.todayArray.push(food);
-    this.counter ++;
-    this.totalCalories += food.calories * this.counter;
-    
-    
-    console.log(food)
+
+  addFood($event, name, calories, image) {
+    this.foods.unshift({
+      name,
+      calories,
+      image,
+      quantity: 1
+    })
+
+    this.showForm();
   }
 
+  addList($event, food, quantity) {
+    food.quantity += parseInt(quantity);
 
+    if (this.listFood.indexOf(food) == -1) {
+      if (this.totalCalories == 0) {
+        this.totalCalories = food.calories * quantity;
+      } else {
+        this.totalCalories += food.calories * quantity;
+      }
+      this.listFood.push(food);
+    } else {
+      this.totalCalories += food.calories * quantity;
+    }
+  }
 }

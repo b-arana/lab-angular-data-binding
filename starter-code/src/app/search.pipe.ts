@@ -1,20 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'search'
+  name: 'search',
+  pure: false
 })
 export class SearchPipe implements PipeTransform {
   
-  transform(items: any[], field: string, value: string): any[] {
+  transform(items: any[], field: string, textSearch: string): any[] {
     if (!items) {
       return [];
     }
 
-    if (!value) {
+    if (!textSearch) {
       return items;
     }
 
-    const myPattern = new RegExp(value, 'i');
-    return items.filter(it => it[field].match(myPattern));
+    const myPattern = new RegExp(textSearch, 'i'); // insensitive -- no tenga en cunenta 
+    return items.filter(item => item[field].toString().match(myPattern));
   }
 };

@@ -1,0 +1,67 @@
+.form-container {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-container input {
+  padding: 5px 10px;
+  margin: 5px 0;
+}
+
+.form-container button {
+  background-color: grey;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+}
+
+.main-container {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.food-container,
+.list-container {
+  width: 50%;
+}
+
+.food-container-item {
+  display: flex;
+  border: 1px solid grey;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.food-container-info span {
+  color: grey;
+}
+
+.food-container img {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.food-container input {
+  padding: 5px 10px;
+}
+
+.food-container button {
+  background-color: grey;
+  border: none;
+  padding: 5px 10px;
+  color: white;
+}
+
+.list-container {
+  text-align: center;
+}
+
+.list-container ul {
+  list-style: none;
+}
+
+.noVisible {
+  display: none;
+}
